@@ -1,36 +1,29 @@
 #include <cstdio>
 #include <cmath>
+#include <cstring>
 
 using namespace std;
 
-long long get_reverse(long long num)
-{
-	int len = log10(num);
-	long long reverse = 0;
-	for(int index = len; index >= 0; --index)
-	{
-		int mod = num % 10;
-		num /= 10;
-		reverse += mod * pow(10, index);
-	}
 
-	return reverse;
-}
-
-void itoa(long long data, char* buffer, int len)
+unsigned int get_reverse(unsigned int num)
 {
-    for(int i = 0; i < len; ++i)
+    char buffer[15];
+	sprintf(buffer, "%u", num);
+    int len = strlen(buffer) - 1;
+    unsigned int reverse = 0;
+	for(int i = len; i >=0; --i)
     {
-        buffer[i] = data % 10;
-        data /= 10;
+        reverse += (buffer[i] - '0') * pow(10, i);
     }
+    return reverse;
 }
 
-bool is_palindrome(long long num)
+bool is_palindrome(unsigned int num)
 {
-	int len = log10(num);
-	char buffer[15];
-	itoa(num, buffer, len + 1);
+    char buffer[15];
+	sprintf(buffer, "%u", num);
+    int len = strlen(buffer) - 1;
+
 	for(int i = 0 ; i <= len / 2; ++i)
 	{
 		if(buffer[i] != buffer[len - i])
@@ -47,16 +40,16 @@ int main()
 	scanf("%d", &n);
 	for(int i = 0; i < n; ++i)
 	{
-		long long original;
-		scanf("%lld", &original);
+		unsigned int original;
+		scanf("%u", &original);
 		int count = 0;
 		do
 		{
-		    long long rev = get_reverse(original);
+		    unsigned int rev = get_reverse(original);
 			original += rev;
 			++count;
 		}while(!is_palindrome(original));
-		printf("%d %lld\n", count, original);
+		printf("%d %u\n", count, original);
 	}
 
 
