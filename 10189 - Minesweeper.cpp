@@ -40,7 +40,7 @@ int main()
 
         }
 
-        memset(matrix, '.', sizeof(char) * 102 * (m + 2));
+        memset(matrix, '.', sizeof(matrix));
         for(int i = 1; i <= m; ++i)
         {
             getchar();
