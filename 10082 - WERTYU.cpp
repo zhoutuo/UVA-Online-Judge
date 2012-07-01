@@ -1,68 +1,94 @@
 #include <cstdio>
-#include <map>
+#include <cctype>
 using namespace std;
 
-typedef pair <char, char> cPair;
+char alphaT[26];
 
-int main()
+void init()
 {
-    map <char, char> table;
-    table.insert(cPair('1', '`'));
-    table.insert(cPair('2', '1'));
-    table.insert(cPair('3', '2'));
-    table.insert(cPair('4', '3'));
-    table.insert(cPair('5', '4'));
-    table.insert(cPair('6', '5'));
-    table.insert(cPair('7', '6'));
-    table.insert(cPair('8', '7'));
-    table.insert(cPair('9', '8'));
-    table.insert(cPair('0', '9'));
-    table.insert(cPair('-', '0'));
-    table.insert(cPair('=', '-'));
-    table.insert(cPair('S', 'A'));
-    table.insert(cPair('D', 'S'));
-    table.insert(cPair('F', 'D'));
-    table.insert(cPair('G', 'F'));
-    table.insert(cPair('H', 'G'));
-    table.insert(cPair('J', 'H'));
-    table.insert(cPair('K', 'J'));
-    table.insert(cPair('L', 'K'));
-    table.insert(cPair(';', 'L'));
-    table.insert(cPair('\'', ';'));
-    table.insert(cPair('X', 'Z'));
-    table.insert(cPair('C', 'X'));
-    table.insert(cPair('V', 'C'));
-    table.insert(cPair('B', 'V'));
-    table.insert(cPair('N', 'B'));
-    table.insert(cPair('M', 'N'));
-    table.insert(cPair(',', 'M'));
-    table.insert(cPair('.', ','));
-    table.insert(cPair('/', '.'));
-    table.insert(cPair('W', 'Q'));
-    table.insert(cPair('E', 'W'));
-    table.insert(cPair('R', 'E'));
-    table.insert(cPair('T', 'R'));
-    table.insert(cPair('Y', 'T'));
-    table.insert(cPair('U', 'Y'));
-    table.insert(cPair('I', 'U'));
-    table.insert(cPair('O', 'I'));
-    table.insert(cPair('P', 'O'));
-    table.insert(cPair('[', 'P'));
-    table.insert(cPair(']', '['));
-    table.insert(cPair('\\', ']'));
+    alphaT['W' - 'A'] = 'Q';
+    alphaT['E' - 'A'] = 'W';
+    alphaT['R' - 'A'] = 'E';
+    alphaT['T' - 'A'] = 'R';
+    alphaT['Y' - 'A'] = 'T';
+    alphaT['U' - 'A'] = 'Y';
+    alphaT['I' - 'A'] = 'U';
+    alphaT['O' - 'A'] = 'I';
+    alphaT['P' - 'A'] = 'O';
+    alphaT['S' - 'A'] = 'A';
+    alphaT['D' - 'A'] = 'S';
+    alphaT['F' - 'A'] = 'D';
+    alphaT['G' - 'A'] = 'F';
+    alphaT['H' - 'A'] = 'G';
+    alphaT['J' - 'A'] = 'H';
+    alphaT['K' - 'A'] = 'J';
+    alphaT['L' - 'A'] = 'K';
+    alphaT['X' - 'A'] = 'Z';
+    alphaT['C' - 'A'] = 'X';
+    alphaT['V' - 'A'] = 'C';
+    alphaT['B' - 'A'] = 'V';
+    alphaT['N' - 'A'] = 'B';
+    alphaT['M' - 'A'] = 'N';
+}
 
-
-    char tmp;
-    while(scanf("%c", &tmp) != EOF)
+char res(char ch)
+{
+    if(isdigit(ch))
     {
-        map<char, char>::iterator res = table.find(tmp);
-        if(res != table.end())
+        if(ch == '0')
         {
-            printf("%c", (*res).second);
+            return '9';
+        }
+        else if(ch == '1')
+        {
+            return '`';
         }
         else
         {
-            printf("%c", tmp);
+            return ch - 1;
         }
+    }
+    else if(isalpha(ch))
+    {
+        return alphaT[ch - 'A'];
+    }
+    else
+    {
+        switch(ch)
+        {
+        case '-':
+            return '0';
+        case '=':
+            return '-';
+        case '[':
+            return 'P';
+        case ']':
+            return '[';
+        case '\\':
+            return ']';
+        case ';':
+            return 'L';
+        case '\'':
+            return ';';
+        case ',':
+            return 'M';
+        case '.':
+            return ',';
+        case '/':
+            return '.';
+        default:
+            return ch;
+        }
+    }
+
+}
+
+int main()
+{
+    init();
+    char tmp;
+    while(scanf("%c", &tmp) != EOF)
+    {
+        printf("%c", res(tmp));
     }
 }
