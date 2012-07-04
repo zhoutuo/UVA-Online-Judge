@@ -2,11 +2,20 @@
 #include <iostream>
 
 
-int prime_factors[] = {2, 3, 5, 7, 11, 13, 17, 23, 29, 31, 37, 41, 43, 47};
+int triangle[101][102] = {0};
 
 
 int main()
 {
+	triangle[0][1] = 1;
+	for(int i = 1; i <= 100; ++i)
+	{
+		for(int j = 1; j <= i + 1; ++j)
+		{
+			triangle[i][j] = triangle[i - 1][j] + triangle[i - 1][j - 1];
+		}
+	}
+
 	int n, m;
 	while(scanf("%d %d", &n, &m))
 	{
@@ -15,53 +24,6 @@ int main()
 			break;
 		}
 
-		int larger = std::max(m, n - m);
-		int less = n - larger;
-
-		int c = 1;
-
-		int factors[14] = {0};
-
-		for(int i = 2; i <= less; ++i)
-		{
-			int tmp = i;
-			int index = 0;
-			while(tmp != 1)
-			{
-				while(tmp % prime_factors[index] == 0)
-				{
-					tmp /= prime_factors[index];
-					++factors[index];
-				}
-
-                ++index;
-			}
-		}
-
-		for(int i = larger + 1; i <= n; ++i)
-		{
-			int tmp = i;
-
-            for(int j = 0; j < 14; ++j)
-            {
-                while(factors[j] > 0 && tmp % prime_factors[j] == 0)
-                {
-                    tmp /= prime_factors[j];
-                    --factors[j];
-                }
-
-                if(tmp < prime_factors[j])
-                {
-                    break;
-                }
-            }
-
-            c *= tmp;
-
-		}
-
-
-
-		printf("%d things taken %d at a time is %d exactly.\n", n, m, c);
+		printf("%d things taken %d at a time is %d exactly.\n", n, m, triangle[n][m + 1]);
 	}
 }
