@@ -5,16 +5,14 @@ using namespace std;
 int nums[10000];
 
 
-int bi_search(int low, int high, int insert)
+int bi_search(int start, int end, int insert)
 {
-	int start = low;
-	int end = high;
 
 	while(start <  end)
 	{
 	    int mid = (start + end) >> 1;
 		int value = nums[mid];
-		if(value >= insert)
+		if(value > insert)
 		{
 			end = mid;
 		}
