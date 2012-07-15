@@ -1,43 +1,40 @@
 #include <cstdio>
 using namespace std;
 
+int bit_count(int num)
+{
+    int sum = 0;
+    while(num)
+    {
+        ++sum;
+        num &= num - 1;
+    }
+    return sum;
+}
+
 int main()
 {
-    int n;
-    scanf("%d", &n);
+	int n;
+	scanf("%d", &n);
 
-    while(n--)
-    {
-        int m;
-        scanf("%d", &m);
 
-        int b1 = 0;
-        int tmp = m;
-        for(int i = 0; i < 32; ++i)
-        {
-            if(tmp & 1)
-            {
-                ++b1;
-            }
-            tmp = tmp >> 1;
-        }
+	while(n--)
+	{
+		int m;
+		scanf("%d", &m);
 
-        int b2 = 0;
-        for(int i = 0; i < 4; ++i)
-        {
-            int last = m % 10;
-            m /= 10;
+		int b1 = bit_count(m);
 
-            for(int j = 0; j < 4; ++j)
-            {
-                if(last & 1)
-                {
-                    ++b2;
-                }
-                last = last >> 1;
-            }
-        }
 
-        printf("%d %d\n", b1, b2);
-    }
+		int b2 = 0;
+		for(int i = 0; i < 4; ++i)
+		{
+			int last = m % 10;
+			m /= 10;
+
+            b2 += bit_count(last);
+		}
+
+		printf("%d %d\n", b1, b2);
+	}
 }
