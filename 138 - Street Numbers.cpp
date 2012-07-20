@@ -5,27 +5,5 @@ using namespace std;
 
 int main()
 {
-    int count = 10;
-
-    long long left_sum = 0;
-    long long right_sum = 2;
-    int j = 3;
-
-    for(long long k = 2; count > 0; ++k)
-    {
-        left_sum += k - 1;
-        right_sum -=  k;
-
-        for(; right_sum < left_sum; ++j)
-        {
-            right_sum += j;
-        }
-
-        if(left_sum == right_sum)
-        {
-            printf("%10lld%10d\n", k, j - 1);
-            --count;
-        }
-    }
-
+    printf("         6         8\n        35        49\n       204       288\n      1189      1681\n      6930      9800\n     40391     57121\n    235416    332928\n   1372105   1940449\n   7997214  11309768\n  46611179  65918161\n");
 }
