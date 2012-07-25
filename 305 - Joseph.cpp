@@ -2,7 +2,7 @@
 #include <cstring>
 using namespace std;
 
-int input[14] = {2,
+int input[14] = {0,2,
 7,
 5,
 30,
