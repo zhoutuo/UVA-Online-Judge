@@ -210,7 +210,7 @@ priority get_rank(bool flag)
 
 int main()
 {
-    freopen("data.txt","w",stdout);
+    //freopen("data.txt","w",stdout);
 
 	while(gets(buffer) != NULL)
 	{
